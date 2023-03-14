@@ -1,11 +1,4 @@
-<!--<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
-
--->
-<h1><img src="./img/voyager-nugets-ikona-32x32.png" style="vertical-align:bottom;margin:0px 5px">Voyager.HealthEndpoint</h1>
+<h1><img src="./img/voyager-nugets-ikona-32x32.png" style="vertical-align:bottom;margin:0px 10px">Voyager.HealthEndpoint</h1>
 
 ---
 
@@ -16,8 +9,9 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [How configure test health check](#health)
+- [How configure health check](#health)
 - [How to test readiness](#readiness)
+- [How check configuration](#checkconfig)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -71,7 +65,7 @@ using  Microsoft.AspNetCore.Builder
     app.UseEndpoints(endpoints =>
     {
       // add this 
-      app.MapHealth("/health");
+      endpoints.MapHealth("/health");
       ...
     });
   }
@@ -89,6 +83,7 @@ For testing, readiness is required to implement the Voyager.HealthEndpoint.Inter
 ```
 public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
 {
+	// It's a class with the logic used to check if is an available connection to this data store
   private readonly ServerNameStory serverNameStory;
 
   public HealthProbe(ServerNameStory serverNameStory)
@@ -97,92 +92,78 @@ public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
   }
 
   public async Task Read()
-	{
+  {
     await serverNameStory.Name().ConfigureAwait(false);
   }
 
   public Task<string> StoreName()
   {
     return serverNameStory.Name();
-   }
- }
+  }
+}
 ```
 
-The new class have to be registred in DI
+The new class have to be registred in DI:
 
+```
 using Microsoft.Extensions.DependencyInjection;
 ...
     public void ConfigureServices(IServiceCollection services)
     {
       ...
       services.AddHealthServices();
+      services.AddTransient<Voyager.HealthEndpoint.Interface.AppStatus, HealthProbe>();
     }
     ...
 ```
-Give examples
+
+Is required to add the new mapping:
+```
+using  Microsoft.AspNetCore.Builder
+...
+  // in the method
+  public void Configure(IApplicationBuilder app)
+  {
+    ...
+    app.UseEndpoints(endpoints =>
+    {
+      // add this 
+      endpoints.MapReadiness("/health/readiness");
+      ...
+    });
+  }
 ```
 
-### Installing
+In case the class return an exception the service will return the HTTP code = 503.
 
-A step by step series of examples that tell you how to get a development env running.
+## 🔧 How check configuration <a name = "checkconfig"></a>
 
-Say what the step will be
+There is another method that from practice is very useful. This is the method that returns the name of the data store. In an environment, the connection to the storage depends on a configuration, for example, a config map in Kubernatess, and sometimes environment variables, it's good to have the possibility to check that everything is ok and that the application uses the desired data storage. 
 
-```
-Give the example
-```
-
-And repeat
+The implementation is in the class like above. It is only required to add the map for the new method.
 
 ```
-until finished
+using  Microsoft.AspNetCore.Builder
+...
+  // in the method
+  public void Configure(IApplicationBuilder app)
+  {
+    ...
+    app.UseEndpoints(endpoints =>
+    {
+      // add this 
+      endpoints.MapSourceName("/sqlname");
+      ...
+    });
+  }
 ```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@andrzejswistowski](https://github.com/AndrzejSwistowski) - Idea & work. Please let me know if you find out an error or suggestions.
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+[contributors](https://github.com/Voyager-Poland).
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Przemysław Wróbel - for the icon.
