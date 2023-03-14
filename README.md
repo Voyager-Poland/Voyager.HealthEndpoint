@@ -54,7 +54,7 @@ using Microsoft.Extensions.DependencyInjection;
 ```
 Is requered adding the endpoint mapping to the pipline:
 
-```
+```C#
 // use the namespace
 using  Microsoft.AspNetCore.Builder
 ...
@@ -80,7 +80,7 @@ curl http://localhost:5200/health
 
 For testing, readiness is required to implement the Voyager.HealthEndpoint.Interface.AppStatus interface. The class has to call a procedure that processes normal routine or in case of any problems it has to throw an exception.
   
-```
+```C#
 public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
 {
 	// It's a class with the logic used to check if is an available connection to this data store
@@ -105,7 +105,7 @@ public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
 
 The new class have to be registred in DI:
 
-```
+```C#
 using Microsoft.Extensions.DependencyInjection;
 ...
     public void ConfigureServices(IServiceCollection services)
@@ -118,7 +118,8 @@ using Microsoft.Extensions.DependencyInjection;
 ```
 
 Is required to add the new mapping:
-```
+
+```C#
 using  Microsoft.AspNetCore.Builder
 ...
   // in the method
@@ -142,7 +143,7 @@ There is another method that from practice is very useful. This is the method th
 
 The implementation is in the class like above. It is only required to add the map for the new method.
 
-```
+```C#
 using  Microsoft.AspNetCore.Builder
 ...
   // in the method
