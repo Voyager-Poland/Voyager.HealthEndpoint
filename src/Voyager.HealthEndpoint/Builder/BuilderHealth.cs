@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Builder
 			return endpointRoute;
 		}
 
-		private static IEndpointRouteBuilder MapReadiness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
+		public static IEndpointRouteBuilder MapReadiness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
 		{
 			endpointRoute.MapGet(path, async (http) =>
 			{

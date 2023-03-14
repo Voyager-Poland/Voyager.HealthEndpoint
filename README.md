@@ -33,7 +33,7 @@ The library doesn't require developers any specific for probing knowledge. It's 
 
 ### Prerequisites
 
-The library coperate with the WebApplicationBuilder or HostApplicationBuilder. By the default the hosts solutions implement required DependencyInjention.
+The library coperate with the WebApplicationBuilder or HostApplicationBuilder. By the default, the hosts contain the required Dependency Injection.
 
 ## 🔧 How configure test health check  <a name = "#health"></a>
 
@@ -48,32 +48,33 @@ The default services are installed to the serivce catalog:
 ```C# 
 // use the namespace
 using Microsoft.Extensions.DependencyInjection;
-		...
-		public void ConfigureServices(IServiceCollection services)
-		{
-			// another servicess
-			...
-			// Add the line
-			services.AddHealthServices();		
-		}
-		...
+...
+    // in the configuration method
+    public void ConfigureServices(IServiceCollection services)
+    {
+      ...
+      // Add the line
+      services.AddHealthServices();
+    }
+    ...
 ```
 Is requered adding the endpoint mapping to the pipline:
 
-```C# 
+```
 // use the namespace
 using  Microsoft.AspNetCore.Builder
 ...
-		public void Configure(IApplicationBuilder app)
-		{
-			...
-			app.UseEndpoints(endpoints =>
-			{
-				// add this line
-				app.MapHealth("/health");
-				...
-			});
-		}
+  // in the method
+  public void Configure(IApplicationBuilder app)
+  {
+    ...
+    app.UseEndpoints(endpoints =>
+    {
+      // add this 
+      app.MapHealth("/health");
+      ...
+    });
+  }
 ```
 
 After running the application it is possible to start probing:
@@ -81,10 +82,42 @@ After running the application it is possible to start probing:
 ```cmd 
 curl http://localhost:5200/health
 ```
-## 🔧 How to test readiness <a name = "readiness">
+## 🔧 How to test readiness <a name = "readiness"></a>
 
-What things you need to install the software and how to install them.
+For testing, readiness is required to implement the Voyager.HealthEndpoint.Interface.AppStatus interface. The class has to call a procedure that processes normal routine or in case of any problems it has to throw an exception.
+  
+```
+public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
+{
+  private readonly ServerNameStory serverNameStory;
 
+  public HealthProbe(ServerNameStory serverNameStory)
+  {
+    this.serverNameStory = serverNameStory;
+  }
+
+  public async Task Read()
+	{
+    await serverNameStory.Name().ConfigureAwait(false);
+  }
+
+  public Task<string> StoreName()
+  {
+    return serverNameStory.Name();
+   }
+ }
+```
+
+The new class have to be registred in DI
+
+using Microsoft.Extensions.DependencyInjection;
+...
+    public void ConfigureServices(IServiceCollection services)
+    {
+      ...
+      services.AddHealthServices();
+    }
+    ...
 ```
 Give examples
 ```
