@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Builder
 		public static IEndpointRouteBuilder MapVoyHealth(this IEndpointRouteBuilder endpointRoute)
 		{
 			endpointRoute.MapHealth();
-			endpointRoute.MapRediness();
+			endpointRoute.MapReadiness();
 			endpointRoute.MapSourceName();
 			return endpointRoute;
 		}
@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Builder
 			return endpointRoute;
 		}
 
-		private static IEndpointRouteBuilder MapRediness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
+		private static IEndpointRouteBuilder MapReadiness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
 		{
 			endpointRoute.MapGet(path, async (http) =>
 			{
