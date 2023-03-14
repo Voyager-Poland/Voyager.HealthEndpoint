@@ -3,3 +3,4 @@ src/Voyager.HealthEndpoint/obj/*
 tests/Voyager.HealthEndpoint.Test/bin/*
 tests/Voyager.HealthEndpoint.Test/obj/*
 .vs/*
+.vscode/*
