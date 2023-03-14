@@ -5,13 +5,11 @@
 
 
 -->
-
-# Voyager.HealthEndpoint
+<h1><img src="./img/voyager-nugets-ikona-32x32.png" style="vertical-align:bottom;margin:0px 5px">Voyager.HealthEndpoint</h1>
 
 ---
 
 <p> The extension for AspNetCore provides endpoints for sampling the health of the hosted application. 
-    <br> 
 </p>
 
 ## 📝 Table of Contents
@@ -36,7 +34,54 @@ The library doesn't require developers any specific for probing knowledge. It's 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+### Prerequisites
+
+The library coperate with the WebApplicationBuilder or HostApplicationBuilder. By the default the hosts solutions implement required DependencyInjention.
+
+### How to start
+
+Adding the NuGet to a project:
+
+```.NET CLI 
+dotnet add package Voyager.HealthEndpoint
+```
+
+The default services are installed to the serivce catalog:
+
+```C# 
+// use the namespace
+using Microsoft.Extensions.DependencyInjection;
+
+		...
+
+		public void ConfigureServices(IServiceCollection services)
+		{
+			// another servicess
+			...
+			// Add the line
+			services.AddHealthServices();
+			
+		}
+		...
+```
+Is requered adding the endpoint mapping to a pipline:
+
+```C# 
+// use the namespace
+using  Microsoft.AspNetCore.Builder
+...
+		public void Configure(IApplicationBuilder app)
+		{
+			...
+			app.UseEndpoints(endpoints =>
+			{
+				// add this line
+				endpoints.MapVoyHealth();
+				...
+			});
+
+		}
+```
 
 ### Prerequisites
 
