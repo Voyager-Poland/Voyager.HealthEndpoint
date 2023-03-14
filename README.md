@@ -16,11 +16,8 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
+- [How configure test health check](#health)
+- [How to test readiness](#readiness)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -32,13 +29,13 @@ The library is very light. It doesn't include any new dependencies except those 
 
 The library doesn't require developers any specific for probing knowledge. It's just an extension that can be used by any kind of health check policy. Depending on an override of one method it can check the connection to any database, could test access to a filesystem, or an external connection, and check any kind of rules validating that the application is ready to work.
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 🏁 Getting Started <a name ="getting_started"></a>
 
 ### Prerequisites
 
 The library coperate with the WebApplicationBuilder or HostApplicationBuilder. By the default the hosts solutions implement required DependencyInjention.
 
-### How to start
+## 🔧 How configure test health check  <a name = "#health"></a>
 
 Adding the NuGet to a project:
 
@@ -51,20 +48,17 @@ The default services are installed to the serivce catalog:
 ```C# 
 // use the namespace
 using Microsoft.Extensions.DependencyInjection;
-
 		...
-
 		public void ConfigureServices(IServiceCollection services)
 		{
 			// another servicess
 			...
 			// Add the line
-			services.AddHealthServices();
-			
+			services.AddHealthServices();		
 		}
 		...
 ```
-Is requered adding the endpoint mapping to a pipline:
+Is requered adding the endpoint mapping to the pipline:
 
 ```C# 
 // use the namespace
@@ -76,14 +70,18 @@ using  Microsoft.AspNetCore.Builder
 			app.UseEndpoints(endpoints =>
 			{
 				// add this line
-				endpoints.MapVoyHealth();
+				app.MapHealth("/health");
 				...
 			});
-
 		}
 ```
 
-### Prerequisites
+After running the application it is possible to start probing:
+
+```cmd 
+curl http://localhost:5200/health
+```
+## 🔧 How to test readiness <a name = "readiness">
 
 What things you need to install the software and how to install them.
 
