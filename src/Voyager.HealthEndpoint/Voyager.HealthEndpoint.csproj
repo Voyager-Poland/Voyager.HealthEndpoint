@@ -24,23 +24,19 @@
 	</PropertyGroup>
   
   <PropertyGroup>
-    <PackageIcon>voyager-nugets-ikona-32x32.png</PackageIcon>
-    <ApplicationIcon>voyager-nugets.ico</ApplicationIcon>
+    <PackageIcon>voyager-nugets-ikona-128x128.png</PackageIcon>
     <DelaySign>False</DelaySign>
     <AssemblyOriginatorKeyFile>sgVHealth.snk</AssemblyOriginatorKeyFile>
+    <PackAsTool>False</PackAsTool>
+    <PackageTags>Kubernetes,Readiness,Liveness,AspNetCore </PackageTags>
 </PropertyGroup>
-
-<ItemGroup>
-    <None Include="..\..\img\voyager-nugets-ikona-32x32.png" Pack="true" PackagePath="\" />
-</ItemGroup>
+  
 
 	<ItemGroup>
-	  <Content Include="voyager-nugets.ico">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-
-	<ItemGroup>
+	  <None Include="..\..\img\voyager-nugets-ikona-128x128.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	  <None Include="..\..\README.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
