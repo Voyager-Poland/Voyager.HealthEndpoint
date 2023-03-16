@@ -126,7 +126,7 @@ using  Microsoft.AspNetCore.Builder
 
 In case the class return an exception the service will return the HTTP code = 503.
 
-## 🔧 How check configuration 
+## 🔧 How to check the configuration 
 
 There is another method that from practice is very useful. This is the method that returns the name of the data store. In an environment, the connection to the storage depends on a configuration, for example, a config map in Kubernatess, and sometimes environment variables, it's good to have the possibility to check that everything is ok and that the application uses the desired data storage. 
 
