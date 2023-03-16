@@ -2,8 +2,6 @@
 {
 	internal class WebStart : ClientCall
 	{
-
-		// Task webServicetask;
 		WebApplication app;
 
 		[SetUp]
