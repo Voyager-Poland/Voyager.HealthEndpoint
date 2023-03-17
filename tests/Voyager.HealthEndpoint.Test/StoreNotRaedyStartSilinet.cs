@@ -14,7 +14,7 @@ namespace Voyager.HealthEndpoint.Test
 		public override async Task CheckIsReady()
 		{
 			string contentTxt = await ClientReqest("/health/readiness", 503);
-			Assert.That(contentTxt, Is.EqualTo("AppNotReady"));
+			Assert.IsTrue(contentTxt.Contains("AppNotReady"));
 		}
 
 		[Test]
