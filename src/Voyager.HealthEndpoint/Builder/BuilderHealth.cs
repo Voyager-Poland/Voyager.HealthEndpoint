@@ -42,15 +42,19 @@ namespace Microsoft.AspNetCore.Builder
 
 		public static IEndpointRouteBuilder MapReadiness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
 		{
-			endpointRoute.MapGet(path, async (http) =>
+			endpointRoute.MapGet(path, (http) =>
 			{
 				try
 				{
-					await IntegrationTest(endpointRoute, http).ConfigureAwait(false);
+					Task task = IntegrationTest(endpointRoute, http);
+					task.Wait();
+					return task;
 				}
 				catch (Exception ex)
 				{
-					await ProcessException(http, ex);
+					Task task = ProcessException(http, ex);
+					task.Wait();
+					return task;
 				}
 			});
 			return endpointRoute;

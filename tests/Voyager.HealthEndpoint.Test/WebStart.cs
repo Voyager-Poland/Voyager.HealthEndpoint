@@ -2,7 +2,7 @@
 {
 	internal class WebStart : ClientCall
 	{
-		WebApplication app;
+		protected WebApplication app;
 
 		[SetUp]
 		public void AppSetup()

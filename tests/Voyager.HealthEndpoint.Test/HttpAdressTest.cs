@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Voyager.HealthEndpoint.Test
 {
-  public class Tests
+  public class HttpAdressTest
   {
     HttpRemoteAddress remoteAddress;
 
