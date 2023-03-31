@@ -30,54 +30,51 @@ namespace Microsoft.AspNetCore.Builder
 			{
 				try
 				{
-					await SourceNameCall(endpointRoute, http).ConfigureAwait(false);
+					await SourceNameCallAsync(endpointRoute, http);
 				}
 				catch (Exception ex)
 				{
-					await ProcessException(http, ex);
+					await ProcessExceptionAsync(http, ex);
 				}
+
 			});
 			return endpointRoute;
 		}
 
 		public static IEndpointRouteBuilder MapReadiness(this IEndpointRouteBuilder endpointRoute, string path = "/health/readiness")
 		{
-			endpointRoute.MapGet(path, (http) =>
+			endpointRoute.MapGet(path, async (http) =>
 			{
 				try
 				{
-					Task task = IntegrationTest(endpointRoute, http);
-					task.Wait();
-					return task;
+					await IntegrationTestAsync(endpointRoute, http);
 				}
 				catch (Exception ex)
 				{
-					Task task = ProcessException(http, ex);
-					task.Wait();
-					return task;
+					await ProcessExceptionAsync(http, ex);
 				}
 			});
 			return endpointRoute;
 		}
 
-		private static async Task ProcessException(HttpContext http, Exception ex)
+		private static Task ProcessExceptionAsync(HttpContext http, Exception ex)
 		{
 			http.Response.StatusCode = (int)HttpStatusCode.ServiceUnavailable;
-			await http.Response.WriteAsync(ex.Message);
+			return http.Response.WriteAsync(ex.Message);
 		}
 
-		private static async Task IntegrationTest(IEndpointRouteBuilder endpointRoute, HttpContext http)
+		private static async Task IntegrationTestAsync(IEndpointRouteBuilder endpointRoute, HttpContext http)
 		{
 			using var scope = endpointRoute.ServiceProvider.CreateScope();
-			var akcja = scope.ServiceProvider.GetService<HealthActions>();
-			await http.Response.WriteAsync(await akcja!.GetIntegrationTest());
+			var actionService = scope.ServiceProvider.GetService<HealthActions>();
+			await http.Response.WriteAsync(await actionService!.GetIntegrationTestAsync());
 		}
 
-		private static async Task SourceNameCall(IEndpointRouteBuilder endpointRoute, HttpContext http)
+		private static async Task SourceNameCallAsync(IEndpointRouteBuilder endpointRoute, HttpContext http)
 		{
 			using var scope = endpointRoute.ServiceProvider.CreateScope();
-			var akcja = scope.ServiceProvider.GetService<HealthActions>();
-			await http.Response.WriteAsync(await akcja!.GetSourceName());
+			var actionService = scope.ServiceProvider.GetService<HealthActions>();
+			await http.Response.WriteAsync(await actionService!.GetSourceNameAsync());
 		}
 
 

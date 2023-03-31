@@ -16,15 +16,15 @@ namespace Voyager.HealthEndpoint
 			return "Ok";
 		}
 
-		public virtual async Task<string> GetIntegrationTest()
+		public virtual async Task<string> GetIntegrationTestAsync()
 		{
-			await appStatus.Read().ConfigureAwait(false);
+			await appStatus.ReadAsync().ConfigureAwait(false);
 			return "Ok";
 		}
 
-		public virtual Task<string> GetSourceName()
+		public virtual Task<string> GetSourceNameAsync()
 		{
-			return appStatus.StoreName();
+			return appStatus.StoreNameAsync();
 		}
 	}
 

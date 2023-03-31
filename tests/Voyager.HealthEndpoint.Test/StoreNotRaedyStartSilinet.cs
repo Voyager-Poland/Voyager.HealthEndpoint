@@ -26,12 +26,12 @@ namespace Voyager.HealthEndpoint.Test
 
 		public class AppNotReady : DefaultDatastore
 		{
-			public override Task Read()
+			public override Task ReadAsync()
 			{
 				throw new Exception("AppNotReady");
 			}
 
-			public override Task<string> StoreName()
+			public override Task<string> StoreNameAsync()
 			{
 				throw new Exception("AppNotReady");
 			}

@@ -19,17 +19,17 @@ namespace Voyager.HealthEndpoint
 			return base.GetSomething();
 		}
 
-		public override async Task<string> GetIntegrationTest()
+		public override async Task<string> GetIntegrationTestAsync()
 		{
 			using var bs = logger?.BeginScope("GetIntegrationTest");
 			logger?.LogInformation($"Endpoint Readiness  {remoteAddress.Get()}");
-			return await base.GetIntegrationTest();
+			return await base.GetIntegrationTestAsync();
 		}
 
-		public override async Task<string> GetSourceName()
+		public override async Task<string> GetSourceNameAsync()
 		{
 			using var bs = logger?.BeginScope("GetSourceName");
-			string name = await base.GetSourceName();
+			string name = await base.GetSourceNameAsync();
 			logger?.LogInformation($"Storname {name}  {remoteAddress.Get()} ");
 			return name;
 		}

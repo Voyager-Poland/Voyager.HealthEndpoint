@@ -80,12 +80,12 @@ public class HealthProbe : Voyager.HealthEndpoint.Interface.AppStatus
     this.serverNameStory = serverNameStory;
   }
 
-  public async Task Read()
+  public async Task ReadAsync()
   {
     await serverNameStory.Name().ConfigureAwait(false);
   }
 
-  public Task<string> StoreName()
+  public Task<string> StoreNameAsync()
   {
     return serverNameStory.Name();
   }

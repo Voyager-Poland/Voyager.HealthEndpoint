@@ -2,17 +2,17 @@
 
 namespace Voyager.HealthEndpoint
 {
-  public class DefaultDatastore : AppStatus
-  {
+	public class DefaultDatastore : AppStatus
+	{
 
-    public virtual Task Read()
-    {
-      return Task.CompletedTask;
-    }
+		public virtual Task ReadAsync()
+		{
+			return Task.CompletedTask;
+		}
 
-    public virtual Task<string> StoreName()
-    {
-      return Task.FromResult("There is no datastore!");
-    }
-  }
+		public virtual Task<string> StoreNameAsync()
+		{
+			return Task.FromResult("There is no datastore!");
+		}
+	}
 }

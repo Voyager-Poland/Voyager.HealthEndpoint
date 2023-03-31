@@ -22,19 +22,19 @@ namespace Voyager.HealthEndpoint.Test
 		[Test]
 		public async Task CallIntergrationTest()
 		{
-			var output = await service.GetIntegrationTest();
+			var output = await service.GetIntegrationTestAsync();
 			Assert.That(output, Is.EqualTo("Ok"));
 		}
 
 		[Test]
 		public async Task CheckStoreName()
 		{
-			var output = await service.GetSourceName();
+			var output = await service.GetSourceNameAsync();
 			Assert.That(output, Is.EqualTo("Test flat file"));
 		}
 
 
-		public Task<string> StoreName()
+		public Task<string> StoreNameAsync()
 		{
 			return Task.FromResult("Test flat file");
 		}
@@ -44,7 +44,7 @@ namespace Voyager.HealthEndpoint.Test
 			return "10.45.32.22";
 		}
 
-		public Task Read()
+		public Task ReadAsync()
 		{
 			return Task.CompletedTask;
 		}
