@@ -100,8 +100,7 @@ using Microsoft.Extensions.DependencyInjection;
     public void ConfigureServices(IServiceCollection services)
     {
       ...
-      services.AddHealthServices();
-      services.AddTransient<Voyager.HealthEndpoint.Interface.AppStatus, HealthProbe>();
+      services.AddHealthServices().AddAppStatus<HealthProbe>();
     }
     ...
 ```

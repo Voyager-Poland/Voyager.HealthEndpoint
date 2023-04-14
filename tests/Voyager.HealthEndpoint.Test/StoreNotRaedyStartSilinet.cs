@@ -1,13 +1,10 @@
-﻿using Voyager.HealthEndpoint.Interface;
-
-namespace Voyager.HealthEndpoint.Test
+﻿namespace Voyager.HealthEndpoint.Test
 {
 	internal class StoreNotRaedyStartSilinet : WebStart
 	{
 		protected override void AddMyServicess(WebApplicationBuilder builder)
 		{
-			builder.Services.AddHealthServicesSilient();
-			builder.Services.AddTransient<AppStatus, AppNotReady>();
+			builder.Services.AddHealthServicesSilient().AddAppStatus<AppNotReady>();
 		}
 
 		[Test]
