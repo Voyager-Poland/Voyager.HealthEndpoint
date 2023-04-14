@@ -18,7 +18,7 @@ The library doesn't require developers any specific for probing knowledge. It's 
 
 The library coperate with the WebApplicationBuilder or HostApplicationBuilder. By the default, the hosts contain the required Dependency Injection.
 
-## 🔧 How configure test health check  
+## 🔧 How to configure test health check  
 
 Adding the NuGet to a project:
 
