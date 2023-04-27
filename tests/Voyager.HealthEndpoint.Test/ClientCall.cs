@@ -31,12 +31,18 @@
 			Assert.That(contentTxt, Is.EqualTo("Ok"));
 		}
 
-
 		[Test]
 		public virtual async Task SqlName()
 		{
 			string contentTxt = await ClientReqest("/sqlname");
 			Assert.That(contentTxt, Is.EqualTo("There is no datastore!"));
+		}
+
+		[Test]
+		public virtual async Task AppName()
+		{
+			string contentTxt = await ClientReqest("/");
+			Assert.That(contentTxt, Is.EqualTo("AppName"));
 		}
 
 

@@ -24,6 +24,12 @@ namespace Microsoft.AspNetCore.Builder
 			return endpointRoute;
 		}
 
+		public static IEndpointRouteBuilder MapAppName(this IEndpointRouteBuilder endpointRoute, string appName, string path = "/")
+		{
+			endpointRoute.MapGet(path, () => appName);
+			return endpointRoute;
+		}
+
 		public static IEndpointRouteBuilder MapSourceName(this IEndpointRouteBuilder endpointRoute, string path = "/sqlname")
 		{
 			endpointRoute.MapGet(path, async (http) =>

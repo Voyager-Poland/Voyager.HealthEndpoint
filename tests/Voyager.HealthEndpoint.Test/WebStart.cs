@@ -10,8 +10,7 @@
 			var builder = WebApplication.CreateBuilder();
 			AddMyServicess(builder);
 			app = builder.Build();
-			app.MapVoyHealth();
-			app.MapGet("/", () => "Is running");
+			app.MapVoyHealth().MapAppName("AppName");
 			app.RunAsync(GetUrl());
 		}
 
