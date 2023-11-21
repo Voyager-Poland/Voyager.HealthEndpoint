@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutputType>Library</OutputType>
@@ -10,10 +10,8 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/Voyager-Poland/Voyager.HealthEndpoint.git</RepositoryUrl>
 		<IsPackable>true</IsPackable>
-		<AssemblyVersion>1.0.0.1</AssemblyVersion>
-		<FileVersion>1.0.0.1</FileVersion>
 		<SignAssembly>True</SignAssembly>
-		<Version></Version>
+		<Version>1.2.2</Version>
 		<Title>Endpoints for probing</Title>
 		<Authors>Andrzej Świstowski</Authors>
 		<Company>Voyager.com sp. z o.o.</Company>
