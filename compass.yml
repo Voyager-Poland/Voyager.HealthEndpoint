@@ -1,0 +1,22 @@
+name: Voyager.HealthEndpoint
+id: 'ari:cloud:compass:6f4ff44f-3daf-4331-936e-f105ac8a0cc5:component/dbdd9e20-37cf-4147-9a6c-5bc93cc76ce7/de9a464e-607a-47b9-9022-f3dc521f64b4'
+description: The extension for AspNetCore provides endpoints for sampling the health of the hosted application.
+configVersion: 1
+typeId: LIBRARY
+ownerId: 'ari:cloud:identity::team/e332590f-359b-4437-86b1-6c1491faae24'
+fields:
+  lifecycle: Active
+  tier: 1
+links:
+  - name: null
+    type: REPOSITORY
+    url: 'https://github.com/Voyager-Poland/voyager.healthendpoint'
+relationships: {}
+labels: null
+customFields:
+  - name: SVNRepositiry
+    type: text
+    value: null
+
+# Learn more about formatting compass.yml:
+# https://go.atlassian.com/compass-yml-format
