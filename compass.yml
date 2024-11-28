@@ -6,7 +6,7 @@ typeId: LIBRARY
 ownerId: 'ari:cloud:identity::team/e332590f-359b-4437-86b1-6c1491faae24'
 fields:
   lifecycle: Active
-  tier: 1
+  tier: 4
 links:
   - name: null
     type: REPOSITORY
