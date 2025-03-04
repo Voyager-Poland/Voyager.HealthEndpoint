@@ -3,8 +3,6 @@ using Voyager.UnitTestLogger;
 
 namespace Voyager.HealthEndpoint.Test
 {
-
-
 	internal class HealthActionsLoggerTest : AppStatus, RemoteAddress
 	{
 		HealthActionsLogger service;
