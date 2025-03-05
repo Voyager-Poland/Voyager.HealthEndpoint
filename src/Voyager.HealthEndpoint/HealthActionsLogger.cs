@@ -15,14 +15,14 @@ namespace Voyager.HealthEndpoint
 
 		public override string GetSomething()
 		{
-			logger?.LogInformation($"Endpoint Liveness  {remoteAddress.Get()}");
+			logger?.LogDebug($"Endpoint Liveness  {remoteAddress.Get()}");
 			return base.GetSomething();
 		}
 
 		public override async Task<string> GetIntegrationTestAsync()
 		{
 			using var bs = logger?.BeginScope("GetIntegrationTest");
-			logger?.LogInformation($"Endpoint Readiness  {remoteAddress.Get()}");
+			logger?.LogDebug($"Endpoint Readiness  {remoteAddress.Get()}");
 			return await base.GetIntegrationTestAsync();
 		}
 
@@ -30,7 +30,7 @@ namespace Voyager.HealthEndpoint
 		{
 			using var bs = logger?.BeginScope("GetSourceName");
 			string name = await base.GetSourceNameAsync();
-			logger?.LogInformation($"Storname {name}  {remoteAddress.Get()} ");
+			logger?.LogDebug($"Storname {name}  {remoteAddress.Get()} ");
 			return name;
 		}
 	}

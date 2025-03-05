@@ -1,15 +1,18 @@
 ﻿using Voyager.HealthEndpoint.Interface;
+using Voyager.UnitTestLogger;
 
 namespace Voyager.HealthEndpoint.Test
 {
 	internal class HealthActionsLoggerTest : AppStatus, RemoteAddress
 	{
 		HealthActionsLogger service;
+		SpyLog<HealthActionsLogger> logger;
 
 		[SetUp]
 		public void Setup()
 		{
-			service = new HealthActionsLogger(this, new Voyager.UnitTestLogger.ConsoleLogger<HealthActionsLogger>(), this);
+			this.logger = new SpyLog<HealthActionsLogger>();
+			service = new HealthActionsLogger(this, logger, this);
 		}
 
 		[Test]
@@ -17,6 +20,7 @@ namespace Voyager.HealthEndpoint.Test
 		{
 			var output = service.GetSomething();
 			Assert.That(output, Is.EqualTo("Ok"));
+			Assert.That(logger.GetSpyData().First().LogLevel, Is.EqualTo(LogLevel.Debug));
 		}
 
 		[Test]
@@ -24,6 +28,7 @@ namespace Voyager.HealthEndpoint.Test
 		{
 			var output = await service.GetIntegrationTestAsync();
 			Assert.That(output, Is.EqualTo("Ok"));
+			Assert.That(logger.GetSpyData().First().LogLevel, Is.EqualTo(LogLevel.Debug));
 		}
 
 		[Test]
@@ -31,6 +36,7 @@ namespace Voyager.HealthEndpoint.Test
 		{
 			var output = await service.GetSourceNameAsync();
 			Assert.That(output, Is.EqualTo("Test flat file"));
+			Assert.That(logger.GetSpyData().First().LogLevel, Is.EqualTo(LogLevel.Debug));
 		}
 
 
