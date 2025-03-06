@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/Voyager-Poland/Voyager.HealthEndpoint.git</RepositoryUrl>
 		<IsPackable>true</IsPackable>
 		<SignAssembly>True</SignAssembly>
-		<Version>1.2.3</Version>
+		<Version>1.3.0</Version>
 		<Title>Endpoints for probing</Title>
 		<Authors>Andrzej Świstowski</Authors>
 		<Company>Voyager.com sp. z o.o.</Company>
