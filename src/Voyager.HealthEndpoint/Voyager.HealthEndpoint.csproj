@@ -11,39 +11,43 @@
 		<RepositoryUrl>https://github.com/Voyager-Poland/Voyager.HealthEndpoint.git</RepositoryUrl>
 		<IsPackable>true</IsPackable>
 		<SignAssembly>True</SignAssembly>
-		<Version>1.3.0</Version>
+		<Version>1.2.3</Version>
 		<Title>Endpoints for probing</Title>
 		<Authors>Andrzej Świstowski</Authors>
 		<Company>Voyager.com sp. z o.o.</Company>
-		<Description>The extension for AspNetCore provides endpoints for sampling the health of the hosted application. After simply adding support specific to the application, it allows testing the readiness of the application for the needs of traffic management services. The interface can be used by Kubernetes, Supervisor, or any solution that probes over HTTP.</Description>
+		<Description>The extension for AspNetCore provides endpoints for sampling the health of the
+			hosted application. After simply adding support specific to the application, it allows testing
+			the readiness of the application for the needs of traffic management services. The interface
+			can be used by Kubernetes, Supervisor, or any solution that probes over HTTP.</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Copyright>Voyager.com sp. z o.o.</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
-  
-  <PropertyGroup>
-    <PackageIcon>voyager-nugets-ikona-128x128.png</PackageIcon>
-    <DelaySign>False</DelaySign>
-    <AssemblyOriginatorKeyFile>sgVHealth.snk</AssemblyOriginatorKeyFile>
-    <PackAsTool>False</PackAsTool>
-    <PackageTags>Kubernetes,Readiness,Liveness,AspNetCore </PackageTags>
-</PropertyGroup>
-  
+
+	<PropertyGroup>
+		<PackageIcon>voyager-nugets-ikona-128x128.png</PackageIcon>
+		<DelaySign>False</DelaySign>
+		<AssemblyOriginatorKeyFile>sgVHealth.snk</AssemblyOriginatorKeyFile>
+		<PackAsTool>False</PackAsTool>
+		<PackageTags>Kubernetes,Readiness,Liveness,AspNetCore </PackageTags>
+	</PropertyGroup>
+
 
 	<ItemGroup>
-	  <None Include="..\..\img\voyager-nugets-ikona-128x128.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="..\..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Include="..\..\img\voyager-nugets-ikona-128x128.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+			Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
 	</ItemGroup>
-	
+
 </Project>
